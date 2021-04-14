@@ -106,10 +106,7 @@ public class Main extends Application
 
 
 
-        //Defining the x axis
-        NumberAxis xAxis = new NumberAxis(xmin, xmax, (xmax-xmin)/10);
-        //xAxis.setLabel("milliseconds since January 1, 1970, 00:00:00 GTM");
-        //xAxis.setLabel("Seconds since January 1, 1900, 00:00:00 GTM");
+        //Defining and formatting the x axis
 
 /*        //example 12 from https://www.javatips.net/api/javafx.scene.chart.numberaxis
         xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
@@ -121,6 +118,8 @@ public class Main extends Application
             }
         });*/
 
+
+        NumberAxis xAxis = new NumberAxis(xmin, xmax, (xmax-xmin)/10);
         xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
 
             @Override
@@ -137,23 +136,15 @@ public class Main extends Application
         //xAxis.getTickLabelRotation();
         xAxis.setTickLabelRotation(25);
 
-        //Setting title to the Stage
-        stage.setTitle("Groundwater levels in piezometer "+ts.fileName);
 
-        //Defining the y axis
+        //Defining and formatting  the y axis
         //round to closest decimal number
-
         double ymaxAdjusted;
         ymaxAdjusted=0.1*Math.round((ymax+0.1)*10);
         double yminAdjusted;
         yminAdjusted=0.1*Math.round((ymin-0.1)*10);
         NumberAxis yAxis = new NumberAxis   (yminAdjusted, ymaxAdjusted, 0.1*(ymaxAdjusted-yminAdjusted));
-
-        //NumberAxis yAxis = new NumberAxis   (ymin, ymax, 0.1*(ymax-ymin));
-
         yAxis.setLabel("Groundwater level (m NAP)");
-
-
         yAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(yAxis) {
 
             @Override
@@ -164,10 +155,8 @@ public class Main extends Application
         });
 
 
-
-
-
-
+        //Setting title to the Stage
+        stage.setTitle("Groundwater levels in piezometer "+ts.fileName);
 
         //Creating the line chart
         LineChart linechart = new LineChart(xAxis, yAxis);
